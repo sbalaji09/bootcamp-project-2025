@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siddharth's Website</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <!-- RESUME BUTTON -->
+    <a href="Resume.pdf" target="_blank" class="resume-button">Resume</a>
+
+    <!-- NAVIGATION -->
+    <nav class="hero-nav">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="hero">
+        <div class="content">
+            <h1>Siddharth Balaji</h1>
+            <p>
+                I'm a student who likes building things. Currently working on distributed systems and exploring AI/ML.
+                Always down to work on interesting projects.
+            </p>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="content-section">
+        <h2>Projects</h2>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>GreenThumb</h3>
+                <p>Mobile app built with React Native and Expo Go that helps users take care of their plants through a fun and interactive user experience</p>
+                <div class="project-tags">
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        React Native
+                    </span>                                          
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        Expo Go
+                    </span>
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        Mobile App
+                    </span>
+                </div>
+                <a href="https://github.com/sbalaji09/GardeningApp" target="_blank" class="project-github-btn">View on GitHub</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Research Paper</h3>
+                <p>Wrote a research paper under guidance of a Stanford PhD student comparing AlexNet and CNN image classifiers with federated learning</p>
+                <div class="project-tags">
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        Research
+                    </span>
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        AI/ML
+                    </span>
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        Federated Learning
+                    </span>
+                </div>
+                <a href="https://github.com/sbalaji09/ResearchPaper2024" target="_blank" class="project-github-btn">View on GitHub</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Log Analytics Project</h3>
+                <p>Real-time log aggregation and search web app built with Go, React, and Redis Streams, enabling fast and efficient developer troubleshooting</p>
+                <div class="project-tags">
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        GoLang
+                    </span>
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        React
+                    </span>
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        Redis
+                    </span>
+                </div>
+                <a href="https://github.com/sbalaji09/LogBuilder" target="_blank" class="project-github-btn">View on GitHub</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Patent Prior Art Discovery System</h3>
+                <p>Automated platform that uses semantic search and scalable storage to reduce patent analysis time for patent lawyers</p>
+                <div class="project-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        Python
+                    </span>
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        MCP
+                    </span>
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        Semantic Search
+                    </span>
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        React
+                    </span>
+                    <span class="project-tag" style="font-weight:bold; border:1px solid black; border-radius:999px; padding:4px 16px; display:inline-block;">
+                        Pinecone
+                    </span>
+                </div>
+                <a href="https://github.com/sbalaji09/PatentDiscoverySystem" target="_blank" class="project-github-btn">View on GitHub</a>
+            </div>            
+            
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="content-section">
+        <h2>Contact</h2>
+        <div class="contact-content">
+            <p><strong>Email:</strong> siddharthbalaji6@gmail.com</p>
+            <p>Feel free to reach out if you want to work on something or just chat.</p>
+            <div class="contact-links">
+                <a href="mailto:siddharthbalaji6@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+                <a href="https://www.linkedin.com/in/siddharth-balaji-9b47712a5/" class="contact-link">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/sbalaji09" class="contact-link">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
