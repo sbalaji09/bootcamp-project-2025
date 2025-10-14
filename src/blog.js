@@ -1,32 +1,45 @@
 // Blog data
+/**
+ * 
+ * type BlogPost = {
+    id: number;
+    title: string;
+    date: string;
+    content: string;
+    tags: string[];
+    readTime: string;
+};
+ */
 const blogs = [
     {
-        title: "Learning DOM Manipulation",
-        image: "https://via.placeholder.com/400x200",
-        imageAlt: "DOM Manipulation Example",
-        description: "Learn how to dynamically update your webpage using JavaScript and the DOM.",
-        date: "October 10, 2025",
-        tags: ["JavaScript", "Web Development", "DOM"],
+        title: "Montana Trip",
+        image: "src/blog-posts/photos/IMG_8452.jpeg",
+        imageAlt: "Montana Trip - Glacier National Park",
+        description: "My trip to Glacier National Park",
+        date: "August 31, 2025",
+        tags: ["Family", "Hiking", "Summer"],
         readTime: "5 min read",
-        slug: "src/blog-posts/blog-post1.html"
+        slug: "src/blog-posts/blog-post1.html",
+        imagePosition: "center 45%"
     },
     {
-        title: "Understanding TypeScript",
-        image: "https://via.placeholder.com/400x200",
-        imageAlt: "TypeScript Example",
-        description: "A quick guide to getting started with TypeScript for modern web development.",
-        date: "October 5, 2025",
-        tags: ["TypeScript", "Web Development"],
+        title: "SF Trip",
+        image: "src/blog-posts/photos/IMG_6540-preview.JPG",
+        imageAlt: "SF Trip with Friends",
+        description: "My trip to SF during summer with two of my closest friends",
+        date: "July 24, 2025",
+        tags: ["Travelling", "Summer", "Friends"],
         readTime: "4 min read",
-        slug: "src/blog-posts/blog-post2.html"
+        slug: "src/blog-posts/blog-post2.html",
+        imagePosition: "center 23%"
     },
     {
-        title: "Styling Tips for Web Developers",
-        image: "https://via.placeholder.com/400x200",
-        imageAlt: "CSS Styling Tips",
-        description: "Discover techniques to make your websites visually appealing and accessible.",
-        date: "September 28, 2025",
-        tags: ["CSS", "Web Design", "Accessibility"],
+        title: "Senior Ditch Day",
+        image: "src/blog-posts/photos/IMG_6048.jpeg",
+        imageAlt: "Senior Ditch Day at Santa Cruz Beach",
+        description: "My senior ditch day to Santa Cruz with my closest friends",
+        date: "May 19, 2025",
+        tags: ["Friends", "Exploring", "Beach"],
         readTime: "6 min read",
         slug: "src/blog-posts/blog-post3.html"
     }
@@ -44,8 +57,10 @@ function createBlogPost(blog) {
     const blogDiv = document.createElement("div");
     blogDiv.className = "blog-post";
 
+    const imageStyle = blog.imagePosition ? `style="object-position: ${blog.imagePosition};"` : '';
+
     blogDiv.innerHTML = `
-        <img src="${blog.image}" alt="${blog.imageAlt}" class="blog-image">
+        <img src="${blog.image}" alt="${blog.imageAlt}" class="blog-image" ${imageStyle}>
         <div class="blog-content">
             <h3 class="blog-title">${blog.title}</h3>
             <div class="blog-meta">
