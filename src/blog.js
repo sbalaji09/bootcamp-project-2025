@@ -7,7 +7,8 @@ const blogs = [
         description: "Learn how to dynamically update your webpage using JavaScript and the DOM.",
         date: "October 10, 2025",
         tags: ["JavaScript", "Web Development", "DOM"],
-        readTime: "5 min read"
+        readTime: "5 min read",
+        slug: "src/blog-posts/blog-post1.html"
     },
     {
         title: "Understanding TypeScript",
@@ -16,7 +17,8 @@ const blogs = [
         description: "A quick guide to getting started with TypeScript for modern web development.",
         date: "October 5, 2025",
         tags: ["TypeScript", "Web Development"],
-        readTime: "4 min read"
+        readTime: "4 min read",
+        slug: "src/blog-posts/blog-post2.html"
     },
     {
         title: "Styling Tips for Web Developers",
@@ -25,15 +27,23 @@ const blogs = [
         description: "Discover techniques to make your websites visually appealing and accessible.",
         date: "September 28, 2025",
         tags: ["CSS", "Web Design", "Accessibility"],
-        readTime: "6 min read"
+        readTime: "6 min read",
+        slug: "src/blog-posts/blog-post3.html"
     }
 ];
 
 // Function to create a blog post element
 function createBlogPost(blog) {
+    const blogLink = document.createElement("a");
+    blogLink.href = blog.slug;
+    blogLink.className = "blog-post-link";
+    blogLink.style.textDecoration = "none";
+    blogLink.style.color = "inherit";
+    blogLink.style.display = "block";
+
     const blogDiv = document.createElement("div");
     blogDiv.className = "blog-post";
-    
+
     blogDiv.innerHTML = `
         <img src="${blog.image}" alt="${blog.imageAlt}" class="blog-image">
         <div class="blog-content">
@@ -48,8 +58,9 @@ function createBlogPost(blog) {
             </div>
         </div>
     `;
-    
-    return blogDiv;
+
+    blogLink.appendChild(blogDiv);
+    return blogLink;
 }
 
 // Function to display all blog posts

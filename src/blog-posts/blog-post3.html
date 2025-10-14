@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning DOM Manipulation - Siddharth's Blog</title>
+    <title>Styling Tips for Web Developers - Siddharth's Blog</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../styles.css">
@@ -81,50 +81,57 @@
         <a href="../../blog.html" class="back-link">← Back to Blog</a>
 
         <div class="blog-header">
-            <h1>Learning DOM Manipulation</h1>
+            <h1>Styling Tips for Web Developers</h1>
             <div class="blog-meta">
-                <span>📅 October 10, 2025</span>
+                <span>📅 September 28, 2025</span>
                 <span> • </span>
-                <span>⏱️ 5 min read</span>
+                <span>⏱️ 6 min read</span>
             </div>
             <div class="blog-tags">
-                <span class="blog-tag">JavaScript</span>
-                <span class="blog-tag">Web Development</span>
-                <span class="blog-tag">DOM</span>
+                <span class="blog-tag">CSS</span>
+                <span class="blog-tag">Web Design</span>
+                <span class="blog-tag">Accessibility</span>
             </div>
         </div>
 
-        <img src="https://via.placeholder.com/800x400" alt="DOM Manipulation Example" class="blog-image">
+        <img src="https://via.placeholder.com/800x400" alt="CSS Styling Tips" class="blog-image">
 
         <div class="blog-content">
             <p>
-                The Document Object Model (DOM) is a powerful interface that allows JavaScript to interact with HTML and XML documents.
-                Understanding DOM manipulation is essential for creating dynamic, interactive web applications.
+                Creating visually appealing and accessible websites requires a solid understanding of CSS and design principles.
+                Let's explore some essential styling tips that will elevate your web development projects.
             </p>
 
-            <h2>What is the DOM?</h2>
+            <h2>Color and Contrast</h2>
             <p>
-                The DOM represents your HTML document as a tree structure where each element is a node. JavaScript can access,
-                modify, add, or delete these nodes to create dynamic user experiences.
+                Choose colors that provide sufficient contrast for readability. Tools like WebAIM's contrast checker can help
+                ensure your color choices meet WCAG accessibility standards. Remember that good contrast benefits all users,
+                not just those with visual impairments.
             </p>
 
-            <h2>Common DOM Manipulation Methods</h2>
+            <h2>Responsive Design</h2>
             <p>
-                Some of the most frequently used methods include <code>getElementById()</code>, <code>querySelector()</code>,
-                <code>createElement()</code>, and <code>appendChild()</code>. These methods allow you to find elements,
-                create new ones, and insert them into your page.
+                Use CSS Grid and Flexbox to create layouts that adapt to different screen sizes. Media queries allow you to
+                apply specific styles at different breakpoints, ensuring your site looks great on mobile, tablet, and desktop
+                devices.
             </p>
 
-            <h2>Best Practices</h2>
+            <h2>Typography Matters</h2>
             <p>
-                When manipulating the DOM, it's important to minimize reflows and repaints by batching your changes.
-                Consider using document fragments for multiple insertions, and always cache DOM references when accessing
-                the same elements multiple times.
+                Select readable fonts and establish a consistent typographic hierarchy. Use relative units like <code>rem</code>
+                and <code>em</code> for font sizes to ensure scalability. Line height, letter spacing, and font weight all
+                contribute to readability.
+            </p>
+
+            <h2>Accessibility First</h2>
+            <p>
+                Always design with accessibility in mind. Use semantic HTML, provide alt text for images, ensure keyboard
+                navigation works properly, and test your site with screen readers. Accessible design is inclusive design.
             </p>
 
             <p>
-                With practice, DOM manipulation becomes second nature, enabling you to build rich, interactive web experiences
-                that respond to user actions in real-time.
+                By following these styling principles, you'll create websites that are not only beautiful but also usable
+                and accessible to everyone.
             </p>
         </div>
     </div>
