@@ -1,4 +1,4 @@
-// Define the BlogPost interface
+// blogPost interface that is used for blog definitions
 type BlogPost = {
     id: number;
     title: string;
@@ -8,9 +8,7 @@ type BlogPost = {
     readTime: string;
 };
 
-// blog.ts
-
-// Example list of blogs
+// empty list of blogs for testing
 const blogs: BlogPost[] = [
     {
         id: 1,
@@ -38,39 +36,34 @@ const blogs: BlogPost[] = [
     }
   ];
   
+  // displays the blogs by manipulating the DOM and using the existing container blog-container
   function displayBlogs(): void {
     const blogContainer = document.getElementById("blog-container");
   
-    // Make sure the container exists
     if (!blogContainer) {
       console.error("Blog container not found!");
       return;
     }
   
-    // Clear the container before adding new blogs (optional)
     blogContainer.innerHTML = "";
   
-    // Iterate over each blog post
+    // iterates over each blog post and adds it to the html
     blogs.forEach((blog) => {
-      // Create a container for each blog
+      // separate container for each blog
       const blogDiv = document.createElement("div");
       blogDiv.classList.add("blog-post");
   
-      // Create and populate the title
       const titleEl = document.createElement("h2");
       titleEl.textContent = blog.title;
   
-      // Create and populate the date
       const dateEl = document.createElement("p");
       dateEl.classList.add("blog-date");
       dateEl.textContent = `📅 ${blog.date} • ⏱️ ${blog.readTime}`;
   
-      // Create and populate the content
       const contentEl = document.createElement("p");
       contentEl.classList.add("blog-content");
       contentEl.textContent = blog.content;
   
-      // Create a container for tags
       const tagsEl = document.createElement("div");
       tagsEl.classList.add("blog-tags");
       blog.tags.forEach((tag) => {
@@ -79,14 +72,14 @@ const blogs: BlogPost[] = [
         tagSpan.textContent = `#${tag}`;
         tagsEl.appendChild(tagSpan);
       });
-  
-      // Append elements to the blog container
+      
+      // appends each of the blog elements to the blog container
       blogDiv.appendChild(titleEl);
       blogDiv.appendChild(dateEl);
       blogDiv.appendChild(contentEl);
       blogDiv.appendChild(tagsEl);
   
-      // Append the blog post to the main container
+      // appends the constructed blog post to the main blog container
       blogContainer.appendChild(blogDiv);
     });
   }

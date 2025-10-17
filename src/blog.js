@@ -1,15 +1,4 @@
-// Blog data
-/**
- * 
- * type BlogPost = {
-    id: number;
-    title: string;
-    date: string;
-    content: string;
-    tags: string[];
-    readTime: string;
-};
- */
+// list of blogs with blog definition
 const blogs = [
     {
         title: "Montana Trip",
@@ -45,7 +34,7 @@ const blogs = [
     }
 ];
 
-// Function to create a blog post element
+// creates a blog post element using class attributes and definitions
 function createBlogPost(blog) {
     const blogLink = document.createElement("a");
     blogLink.href = blog.slug;
@@ -78,7 +67,7 @@ function createBlogPost(blog) {
     return blogLink;
 }
 
-// Function to display all blog posts
+// displays all the blogs using DOM manipulation
 function displayBlogs() {
     const blogContainer = document.getElementById("blog-container");
     
@@ -87,15 +76,13 @@ function displayBlogs() {
         return;
     }
     
-    // Clear existing content
     blogContainer.innerHTML = "";
     
-    // Add each blog post to the container
+    // adds each individual blog post to the container
     blogs.forEach(blog => {
         const postElement = createBlogPost(blog);
         blogContainer.appendChild(postElement);
     });
 }
 
-// Initialize the blog when the DOM is loaded
 document.addEventListener('DOMContentLoaded', displayBlogs);
