@@ -1,8 +1,8 @@
-// You can name the function within page.tsx anything you want.
 export default function Home() {
   return (
-		<div>
-			// content will go within here.
-		</div>
-		) 
+    <div>
+      <h1>Welcome to My Website</h1>
+      <p>This is the home page.</p>
+    </div>
+  );
 }
