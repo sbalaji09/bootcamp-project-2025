@@ -1,17 +1,7 @@
 export default function Home() {
   return (
     <>
-      <a href="Resume.pdf" target="_blank" className="resume-button">Resume</a>
-
-      {/* NAVIGATION */}
-      <nav className="hero-nav">  
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="blog.html">Blog</a></li>
-        </ul>
-      </nav>
+      <a href="/Resume.pdf" target="_blank" className="resume-button">Resume</a>
 
       {/* ABOUT SECTION */}
       <section id="about" className="hero">
