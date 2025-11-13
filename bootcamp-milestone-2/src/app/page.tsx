@@ -1,4 +1,22 @@
-export default function Home() {
+import connectDB from '@/database/db';
+import Project from '@/database/projectSchema';
+
+async function getProjects(){
+	try {
+		await connectDB() // function from db.ts before
+		// query for all projects and sort by order
+	    const projects = await Project.find().sort({ order: 1 }).orFail()
+		// send a response as the projects as the message
+	    return projects
+	} catch (err) {
+		console.error('Error fetching projects:', err)
+	    return null
+	}
+}
+
+export default async function Home() {
+  const projects = await getProjects();
+
   return (
     <>
       <a href="/Resume.pdf" target="_blank" className="resume-button">Resume</a>
@@ -18,81 +36,30 @@ export default function Home() {
       <section id="projects" className="content-section">
         <h2>Projects</h2>
 
-        <div className="projects-grid">
-          <div className="project-card">
-            <h3>GreenThumb</h3>
-            <p>Mobile app built with React Native and Expo Go that helps users take care of their plants through a fun and interactive user experience</p>
-            <div className="project-tags">
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                React Native
-              </span>                                          
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                Expo Go
-              </span>
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                Mobile App
-              </span>
-            </div>
-            <a href="https://github.com/sbalaji09/GardeningApp" target="_blank" className="project-github-btn">View on GitHub</a>
+        {!projects || projects.length === 0 ? (
+          <p style={{textAlign: 'center', fontSize: '1.2rem', color: '#666'}}>No projects found.</p>
+        ) : (
+          <div className="projects-grid">
+            {projects.map((project, index) => (
+              <div className="project-card" key={index}>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div className="project-tags">
+                  {project.tags.map((tag: string, tagIndex: number) => (
+                    <span
+                      key={tagIndex}
+                      className="project-tag"
+                      style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <a href={project.githubUrl} target="_blank" className="project-github-btn">View on GitHub</a>
+              </div>
+            ))}
           </div>
-
-          <div className="project-card">
-            <h3>Research Paper</h3>
-            <p>Wrote a research paper under guidance of a Stanford PhD student comparing AlexNet and CNN image classifiers with federated learning</p>
-            <div className="project-tags">
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                Research
-              </span>
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                AI/ML
-              </span>
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                Federated Learning
-              </span>
-            </div>
-            <a href="https://github.com/sbalaji09/ResearchPaper2024" target="_blank" className="project-github-btn">View on GitHub</a>
-          </div>
-
-          <div className="project-card">
-            <h3>Log Analytics Project</h3>
-            <p>Real-time log aggregation and search web app built with Go, React, and Redis Streams, enabling fast and efficient developer troubleshooting</p>
-            <div className="project-tags">
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                GoLang
-              </span>
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                React
-              </span>
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                Redis
-              </span>
-            </div>
-            <a href="https://github.com/sbalaji09/LogBuilder" target="_blank" className="project-github-btn">View on GitHub</a>
-          </div>
-
-          <div className="project-card">
-            <h3>Patent Prior Art Discovery System</h3>
-            <p>Automated platform that uses semantic search and scalable storage to reduce patent analysis time for patent lawyers</p>
-            <div className="project-tags" style={{display:"flex", flexWrap:"wrap", gap:"8px", marginBottom:"8px"}}>
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                Python
-              </span>
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                MCP
-              </span>
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                Semantic Search
-              </span>
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                React
-              </span>
-              <span className="project-tag" style={{fontWeight:"bold", border:"1px solid black", borderRadius:"999px", padding:"4px 16px", display:"inline-block"}}>
-                Pinecone
-              </span>
-            </div>
-            <a href="https://github.com/sbalaji09/PatentDiscoverySystem" target="_blank" className="project-github-btn">View on GitHub</a>
-          </div>
-        </div>
+        )}
       </section>
 
       {/* CONTACT SECTION */}
