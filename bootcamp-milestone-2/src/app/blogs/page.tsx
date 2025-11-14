@@ -7,8 +7,8 @@ async function getBlogs(){
 		await connectDB() // function from db.ts before
 		// query for all blogs and sort by date
 	    const blogs = await Blog.find().sort({ date: -1 }).orFail()
-		// send a response as the blogs as the message
-	    return blogs
+		// Convert Mongoose documents to plain objects
+		return blogs.map(blog => blog.toObject())
 	} catch (err) {
 		console.error('Error fetching blogs:', err)
 	    return null

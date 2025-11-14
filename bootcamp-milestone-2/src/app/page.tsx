@@ -6,8 +6,8 @@ async function getProjects(){
 		await connectDB() // function from db.ts before
 		// query for all projects and sort by order
 	    const projects = await Project.find().sort({ order: 1 }).orFail()
-		// send a response as the projects as the message
-	    return projects
+		// Convert Mongoose documents to plain objects
+		return projects.map(project => project.toObject())
 	} catch (err) {
 		console.error('Error fetching projects:', err)
 	    return null

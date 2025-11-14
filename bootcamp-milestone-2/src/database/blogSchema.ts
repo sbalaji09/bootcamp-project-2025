@@ -12,7 +12,7 @@ export type IBlog = {
   image: string;
   imageAlt: string;
   description: string;
-  date: Date;
+  date: string; // Changed to string to match the data in MongoDB
   tags: string[];
   readTime: string;
   slug: string;
@@ -27,7 +27,7 @@ const blogSchema = new Schema<IBlog>({
   image: { type: String, required: true },
   imageAlt: { type: String, required: true },
   description: { type: String, required: true },
-  date: { type: Date, required: true, default: Date.now },
+  date: { type: String, required: true }, // Changed to String to match the data
   tags: { type: [String], required: true },
   readTime: { type: String, required: true },
   slug: { type: String, required: true },
