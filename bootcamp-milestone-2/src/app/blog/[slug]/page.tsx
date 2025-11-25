@@ -1,0 +1,105 @@
+import Comment from '@/components/comment';
+import Image from 'next/image';
+import styles from './blog.module.css';
+
+type Props = {
+  params: Promise<{ slug: string }>
+}
+
+async function getBlog(slug: string) {
+	try {
+		// This fetches the blog from an api endpoint that would GET the blog
+		const res = await fetch(`http://localhost:3000/api/Blogs/${slug}`, {
+			cache: "no-store",
+		})
+		// This checks that the GET request was successful
+		if (!res.ok) {
+			throw new Error("Failed to fetch blog");
+		}
+
+		return res.json();
+	} catch (err: unknown) {
+		console.log(`error: ${err}`);
+		return null;
+		// `` are a special way of allowing JS inside a string
+		// Instead of "error: " + err, we can just do the above
+		// it is simular to formated strings in python --> f"{err}"
+	}
+}
+
+export default async function Blog({ params }: Props) {
+  const { slug } = await params;
+	const blog = await getBlog(slug);
+
+	// Handle blog not found
+	if (!blog) {
+		return (
+			<div className={styles.blogContainer}>
+				<h1>Blog Not Found</h1>
+				<p>Sorry, the blog post you're looking for doesn't exist.</p>
+			</div>
+		);
+	}
+
+	// Fix image path: convert "src/..." to "/..." for Next.js public folder
+	const imageSrc = blog.image?.startsWith('src/')
+		? blog.image.replace('src/', '/')
+		: (blog.image || '/placeholder.jpg');
+
+	// Ensure we always have valid alt text
+	const altText = (blog.imageAlt && blog.imageAlt.trim()) || blog.title || 'Blog image';
+
+  return (
+    <div className={styles.blogContainer}>
+			<article className={styles.blogArticle}>
+				<header className={styles.blogHeader}>
+					<h1 className={styles.blogTitle}>{blog.title}</h1>
+					<div className={styles.blogMeta}>
+						<span>{blog.date}</span>
+						<span> • </span>
+						<span>{blog.readTime}</span>
+					</div>
+					{blog.tags && blog.tags.length > 0 && (
+						<div className={styles.blogTags}>
+							{blog.tags.map((tag: string, index: number) => (
+								<span key={index} className={styles.blogTag}>#{tag}</span>
+							))}
+						</div>
+					)}
+				</header>
+
+				{imageSrc && (
+					<div className={styles.blogImageContainer}>
+						<Image
+							src={imageSrc}
+							alt={altText}
+							width={1200}
+							height={600}
+							className={styles.blogImage}
+							style={{ objectPosition: blog.imagePosition || 'center' }}
+						/>
+					</div>
+				)}
+
+				<div className={styles.blogContent}>
+					<p>{blog.description}</p>
+					{blog.content && <div dangerouslySetInnerHTML={{ __html: blog.content }} />}
+				</div>
+
+				{/* Comments Section */}
+				<section className={styles.commentsSection}>
+					<h2 className={styles.commentsTitle}>Comments ({blog.comments?.length || 0})</h2>
+					{blog.comments && blog.comments.length > 0 ? (
+						<div className={styles.commentsList}>
+							{blog.comments.map((comment: any, index: number) => (
+								<Comment key={index} comment={comment} />
+							))}
+						</div>
+					) : (
+						<p className={styles.noComments}>No comments yet. Be the first to comment!</p>
+					)}
+				</section>
+			</article>
+    </div>
+  );
+}

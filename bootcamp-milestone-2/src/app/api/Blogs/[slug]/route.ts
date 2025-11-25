@@ -48,7 +48,19 @@ export async function GET(req: NextRequest, { params }: IParams) {
 		const { slug } = await params // await the params promise and destructure
 
 	   try {
-	        const blog = await Blog.findOne({ slug }).orFail()
+	        // Try to find blog by exact slug match first
+	        let blog = await Blog.findOne({ slug }).exec()
+
+	        // If not found, try to find by slug containing the search term
+	        // This handles cases where slug is "src/blog-posts/blog-post1.html" but we search for "blog-post1"
+	        if (!blog) {
+	            blog = await Blog.findOne({ slug: { $regex: slug, $options: 'i' } }).exec()
+	        }
+
+	        if (!blog) {
+	            return NextResponse.json('Blog not found.', { status: 404 })
+	        }
+
 	        return NextResponse.json(blog)
 	    } catch (err) {
 	        return NextResponse.json('Blog not found.', { status: 404 })
