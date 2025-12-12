@@ -1,6 +1,0 @@
-{
-  "buildCommand": "cd bootcamp-milestone-2 && npm install && npm run build",
-  "outputDirectory": "bootcamp-milestone-2/.next",
-  "installCommand": "cd bootcamp-milestone-2 && npm install",
-  "framework": "nextjs"
-}
