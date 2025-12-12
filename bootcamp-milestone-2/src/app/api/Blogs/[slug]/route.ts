@@ -66,3 +66,58 @@ export async function GET(req: NextRequest, { params }: IParams) {
 	        return NextResponse.json('Blog not found.', { status: 404 })
 	    }
 }
+
+// POST - Creates a new comment for a blog post
+export async function POST(req: NextRequest, { params }: IParams) {
+    await connectDB()
+    const { slug } = await params
+
+    try {
+        const body = await req.json()
+        const { user, comment } = body
+
+        // Validate required fields
+        if (!user || !comment) {
+            return NextResponse.json(
+                { error: 'User and comment are required' },
+                { status: 400 }
+            )
+        }
+
+        // Find the blog by slug
+        let blog = await Blog.findOne({ slug }).exec()
+        if (!blog) {
+            blog = await Blog.findOne({ slug: { $regex: slug, $options: 'i' } }).exec()
+        }
+
+        if (!blog) {
+            return NextResponse.json(
+                { error: 'Blog not found' },
+                { status: 404 }
+            )
+        }
+
+        // Create the new comment
+        const newComment = {
+            user: user.trim(),
+            comment: comment.trim(),
+            time: new Date()
+        }
+
+        // Add comment to the blog
+        blog.comments = blog.comments || []
+        blog.comments.push(newComment)
+        await blog.save()
+
+        return NextResponse.json(
+            { message: 'Comment added successfully', comment: newComment },
+            { status: 201 }
+        )
+    } catch (err) {
+        console.error('Error adding comment:', err)
+        return NextResponse.json(
+            { error: 'Failed to add comment' },
+            { status: 500 }
+        )
+    }
+}

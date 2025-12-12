@@ -1,4 +1,5 @@
 import Comment from '@/components/comment';
+import CommentForm from '@/components/CommentForm';
 import Image from 'next/image';
 import styles from './blog.module.css';
 
@@ -98,6 +99,9 @@ export default async function Blog({ params }: Props) {
 					) : (
 						<p className={styles.noComments}>No comments yet. Be the first to comment!</p>
 					)}
+
+					{/* Comment Form */}
+					<CommentForm slug={slug} type="blog" />
 				</section>
 			</article>
     </div>

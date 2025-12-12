@@ -1,5 +1,7 @@
 import connectDB from '@/database/db';
 import Project from '@/database/projectSchema';
+import PortfolioComments from '@/components/PortfolioComments';
+import ContactForm from '@/components/ContactForm';
 
 async function getProjects(){
 	try {
@@ -82,8 +84,14 @@ export default async function Home() {
               <span>GitHub</span>
             </a>
           </div>
+
+          {/* Contact Form with EmailJS */}
+          <ContactForm />
         </div>
       </section>
+
+      {/* PORTFOLIO COMMENTS SECTION */}
+      <PortfolioComments />
     </>
   );
 }
