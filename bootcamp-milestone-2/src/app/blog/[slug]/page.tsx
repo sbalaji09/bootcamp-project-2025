@@ -2,6 +2,8 @@ import Comment from '@/components/comment';
 import CommentForm from '@/components/CommentForm';
 import Image from 'next/image';
 import styles from './blog.module.css';
+import connectDB from '@/database/db';
+import BlogModel from '@/database/blogSchema';
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -9,22 +11,25 @@ type Props = {
 
 async function getBlog(slug: string) {
 	try {
-		// This fetches the blog from an api endpoint that would GET the blog
-		const res = await fetch(`http://localhost:3000/api/Blogs/${slug}`, {
-			cache: "no-store",
-		})
-		// This checks that the GET request was successful
-		if (!res.ok) {
-			throw new Error("Failed to fetch blog");
+		await connectDB();
+
+		// Try to find blog by exact slug match first
+		let blog = await BlogModel.findOne({ slug }).exec();
+
+		// If not found, try regex search
+		if (!blog) {
+			blog = await BlogModel.findOne({ slug: { $regex: slug, $options: 'i' } }).exec();
 		}
 
-		return res.json();
+		if (!blog) {
+			return null;
+		}
+
+		// Convert to plain object for serialization
+		return blog.toObject();
 	} catch (err: unknown) {
 		console.log(`error: ${err}`);
 		return null;
-		// `` are a special way of allowing JS inside a string
-		// Instead of "error: " + err, we can just do the above
-		// it is simular to formated strings in python --> f"{err}"
 	}
 }
 
