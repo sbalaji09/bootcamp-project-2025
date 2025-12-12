@@ -1,7 +1,6 @@
 // db.ts
 import mongoose from "mongoose";
 
-const url: string = process.env.MONGO_URI as string;
 let connection: typeof mongoose;
 
 /**
@@ -11,6 +10,10 @@ let connection: typeof mongoose;
  */
 const connectDB = async () => {
   if (!connection) {
+    const url = process.env.MONGO_URI;
+    if (!url) {
+      throw new Error("MONGO_URI environment variable is not set");
+    }
     connection = await mongoose.connect(url);
     return connection;
   }
