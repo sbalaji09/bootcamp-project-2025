@@ -3,6 +3,9 @@ import Project from '@/database/projectSchema';
 import PortfolioComments from '@/components/PortfolioComments';
 import ContactForm from '@/components/ContactForm';
 
+// Force dynamic rendering - fetch data at request time, not build time
+export const dynamic = 'force-dynamic';
+
 async function getProjects(){
 	try {
 		await connectDB() // function from db.ts before
